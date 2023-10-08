@@ -5,10 +5,12 @@ allprojects { Project project ->
         toolVersion '6.13'
         ignoreFailures false
         showViolations true
+//        配置checkstyle规则文件路径
+        configFile rootProject.file('hook/checkstyle.xml')
     }
     // 脚本pre-commit 调用 checkstyle task 检查代码(修改提交的代码)
     task checkstyle(type: Checkstyle) {
-        source 'app/src/main/java'
+        source '**/src/main/java'
         exclude '**/gen/**'
         exclude '**/R.java'
         exclude '**/BuildConfig.java'
@@ -30,33 +32,32 @@ allprojects { Project project ->
         } else {
             include '**/*.java'
         }
-        configFile rootProject.file('hook/checkstyle.xml')
         classpath = files()
     }
 }
 //根据git status 获取 修改的文件
-    def getChangeFiles() {
-        try {
-            String changeInfo = 'git status -s'.execute(null, project.rootDir).text.trim()
-            return changeInfo == null ? "" : changeInfo
-        } catch (Exception e) {
-            return ""
-        }
+def getChangeFiles() {
+    try {
+        String changeInfo = 'git status -s'.execute(null, project.rootDir).text.trim()
+        return changeInfo == null ? "" : changeInfo
+    } catch (Exception e) {
+        return ""
     }
+}
 
 //只对java代码
-    def filterCommitter(String info) {
-        ArrayList<String> filterList = new ArrayList<String>()
-        String[] lines = info.split("\\n")
-        for (String line : lines) {
-            if (line.contains(".java")) {
-                String[] split = line.trim().split(" ")
-                for (String str : split) {
-                    if (str.contains(".java")) {
-                        filterList.add(str)
-                    }
+static def filterCommitter(String info) {
+    ArrayList<String> filterList = new ArrayList<String>()
+    String[] lines = info.split("\\n")
+    for (String line : lines) {
+        if (line.contains(".java")) {
+            String[] split = line.trim().split(" ")
+            for (String str : split) {
+                if (str.contains(".java")) {
+                    filterList.add(str)
                 }
             }
         }
-        return filterList
     }
+    return filterList
+}
