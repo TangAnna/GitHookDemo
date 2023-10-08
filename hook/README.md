@@ -1,8 +1,8 @@
-git hook 操作手册
-参考地址
-git 钩子的使用: https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90
-gradle Checkstyle Plugin: https://docs.gradle.org/current/userguide/checkstyle_plugin.html
-Checkstyle规则说明: https://checkstyle.sourceforge.io/checks.html
+git hook 操作手册  
+参考地址  
+git 钩子的使用: https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90  
+gradle Checkstyle Plugin: https://docs.gradle.org/current/userguide/checkstyle_plugin.html  
+Checkstyle规则说明: https://checkstyle.sourceforge.io/checks.html  
 
 目的
 团队协作强制代码规范检查，希望每一位开发同学一起维护和使用起来我们的开发规范
