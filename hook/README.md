@@ -30,15 +30,22 @@ apply from: "hook/checkstyle.gradle"
 2.初始化.git hook 配置文件  
 在Android studio中打开Terminal 或者是cmd后cd到项目根目录下执行下面命令  
 #进到hook文件夹  
- cd hook  
+```
+ cd hook
+``` 
 #给hooks.sh脚本增加可执行权限  
- chmod 777 hooks.sh  
+```
+ chmod 777 hooks.sh
+``` 
 #执行hook.sh 文件  
+```
  ./hooks.sh  
-
+```
 到项目根目录文件夹中查看.git -->hooks 文件夹中是否包含 pre-commit和commit-msg 两个可执行文件 (结尾带有.sample的不算)  
 #退出  
-cd ..  
+```
+cd ..
+```
 到此 集成已完成，可以创建不符合checkstyle 的代码测试下  
 
 辅助工具  
