@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# 用 `` 可以将命令的输出结果赋值给变量
+# 获取当前提交的 commit msg
+commit_msg=`cat $1`
+
+# 获取用户 email
+email=`git config user.email`
+msg_re="^(feat|fix|perf|refactor|docs|style|release|Revert)(\(.+\))?: .{1,100}"
+
+if [[ ! $commit_msg =~ $msg_re ]]
+then
+	echo "\n不合法的 commit 消息提交格式，请使用正确的格式：\
+	\nfeat: 新功能、新特性 如果有禅道task描述请附带任务地址\
+  \nfix: 修改 bug 如果有禅道bug 或者其他平台bug描述地址请付代码\
+  \nperf: 更改代码，以提高性能（在不影响代码内部行为的前提下，对程序性能进行优化）\
+  \nrefactor: 代码重构（重构，在不影响代码内部行为、功能下的代码修改）\
+  \ndocs: 文档修改\
+  \nstyle: 代码格式修改\
+  \nrelease: 发布新版本\
+  \nRevert: 回滚代码\
+  "
+
+	# 异常退出
+	exit 1
+fi
+
+#添加邮箱格式校验
+#email_re="@murongtech\.com"
+#if [[ ! $email =~ $email_re ]]
+#then
+#	echo "$email 此用户没有权限，具有权限的用户为： xxx@murongtech.com"
+#	# 异常退出
+#	exit 1
+#fi
