@@ -10,7 +10,7 @@ allprojects { Project project ->
     }
     // 脚本pre-commit 调用 checkstyle task 检查代码(修改提交的代码)
     task checkstyle(type: Checkstyle) {
-        source '../src/main/java'
+        source 'src/main/java'
         exclude '**/gen/**'
         exclude '**/R.java'
         exclude '**/BuildConfig.java'
