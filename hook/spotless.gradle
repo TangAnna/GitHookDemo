@@ -1,0 +1,21 @@
+allprojects { Project project ->
+    apply plugin: 'com.diffplug.spotless'
+    spotless {
+        java {
+            target 'src/*/java/**/*.java'
+            importOrder()
+            removeUnusedImports()
+            cleanthat()          // has its own section below
+
+            // Choose one of these formatters.
+            googleJavaFormat()   // has its own section below
+            formatAnnotations()  // fixes formatting of type annotations, see below
+
+            licenseHeaderFile rootProject.file('hook/license-header')
+        }
+
+        format 'xml', {
+            target '**/*.xml'
+        }
+    }
+}

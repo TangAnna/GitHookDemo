@@ -33,17 +33,23 @@ SCRIPT_DIR=$(dirname "$0")
 #echo "SCRIPT_DIR=$SCRIPT_DIR"
 SCRIPT_ABS_PATH=`cd "$SCRIPT_DIR"; pwd`
 #echo "SCRIPT_ABS_PATH=$SCRIPT_ABS_PATH"
-#在app项目目录下执行 gradlew 命令执行 checkstyle task
-$SCRIPT_ABS_PATH/../../gradlew  -P checkCommit="true" checkstyle
-if [ $? -eq 0   ]; then
-# checkstyle检查成功
-    info=$TAG"checkstyle OK"
+#先执行代码格式化
+$SCRIPT_ABS_PATH/../../gradlew  -P checkCommit="true" spotlessApply
+    info=$TAG"spotlessApply completed"
     printS $info
-else
-#checkstyle检查失败
-    info=$TAG"checkstyle fail"
-    printE $info
-    exit 1
+
+    #在app项目目录下执行 gradlew 命令执行 checkstyle task
+    $SCRIPT_ABS_PATH/../../gradlew  -P checkCommit="true" checkstyle
+    if [ $? -eq 0   ];
+    then
+    # checkstyle检查成功
+        info=$TAG"checkstyle OK"
+        printS $info
+    else
+    #checkstyle检查失败
+        info=$TAG"checkstyle fail"
+        printE $info
+        exit 1
 fi
 #结束
 

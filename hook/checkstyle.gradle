@@ -14,6 +14,8 @@ allprojects { Project project ->
         exclude '**/gen/**'
         exclude '**/R.java'
         exclude '**/BuildConfig.java'
+        exclude 'src/test/java'
+        exclude '*.md'
 
         if (project.hasProperty('checkCommit') && project.property("checkCommit")) {
             List<String> fileS = filterCommitter(getChangeFiles())
