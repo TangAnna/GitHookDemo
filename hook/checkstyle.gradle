@@ -21,9 +21,6 @@ allprojects { Project project ->
             List<String> fileS = filterCommitter(getChangeFiles())
             def includeList = new ArrayList<String>()
             for (String split : fileS) {
-                if (!split.endsWith(".java")){
-                    continue
-                }
                 String[] splits = split.split("/")
                 String fileName = splits[splits.length - 1]
                 includeList.add("**/" + fileName)
